@@ -1,0 +1,182 @@
+[33mcommit 90aca268fb3f9a1f8e95b11b3be58f9c8977b8ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;32mfitur-pembayaran[m[33m)[m
+Author: Mrupyagung <mrrupyagung@gmail.com>
+Date:   Sat May 31 16:06:32 2025 +0700
+
+    fix bug id user
+
+[1mdiff --git a/app/Controllers/Pemesanan.php b/app/Controllers/Pemesanan.php[m
+[1mindex 4d5ef7c..1bafa22 100644[m
+[1m--- a/app/Controllers/Pemesanan.php[m
+[1m+++ b/app/Controllers/Pemesanan.php[m
+[36m@@ -49,6 +49,12 @@[m [mclass Pemesanan extends BaseController[m
+             return redirect()->back();[m
+         }[m
+ [m
+[32m+[m[32m        // Cek session user login[m
+[32m+[m[32m        $user_id = session()->get('user_id');[m
+[32m+[m[32m        if (!$user_id) {[m
+[32m+[m[32m            session()->setFlashdata('error', 'Silakan login terlebih dahulu.');[m
+[32m+[m[32m            return redirect()->to(base_url('login'));[m
+[32m+[m[32m        }[m
+         // Ambil kode pemesanan baru[m
+         $kode_pemesanan = $this->pemesanans->getKodePemesanan();[m
+ [m
+[36m@@ -91,7 +97,7 @@[m [mclass Pemesanan extends BaseController[m
+                 'pelanggan_id' => $this->request->getPost('pelanggan_id'),[m
+                 'kendaraan_id' => $id_kendaraan,[m
+                 'status' => 'approve',[m
+[31m-                'user_id' =>  '25',[m
+[32m+[m[32m                'user_id' => $user_id,[m
+                 // 'user_id' => session()->get('user_id'),[m
+             ];[m
+             // dd($pemesanan);  [m
+[1mdiff --git a/app/Models/PemesananModel.php b/app/Models/PemesananModel.php[m
+[1mindex ef6c37c..b4acc34 100644[m
+[1m--- a/app/Models/PemesananModel.php[m
+[1m+++ b/app/Models/PemesananModel.php[m
+[36m@@ -1,5 +1,5 @@[m
+ <?php[m
+[31m-[m
+[32m+[m[32m// untuk model frontend[m
+ namespace App\Models;[m
+ [m
+ use CodeIgniter\Model;[m
+[36m@@ -8,7 +8,7 @@[m [mclass PemesananModel extends Model[m
+ {[m
+     protected $table = 'pemesanan';[m
+     protected $primaryKey = 'id_pemesanan';[m
+[31m-    protected $allowedFields = ['kode_pemesanan', 'lama_pemesanan','tanggal_pemesanan', 'tanggal_awal','tanggal_akhir', 'total_harga', 'jaminan_identitas', 'pelanggan_id', 'kendaraan_id', 'persetujuan'];[m
+[32m+[m[32m    protected $allowedFields = ['kode_pemesanan', 'lama_pemesanan','tanggal_pemesanan', 'tanggal_awal','tanggal_akhir', 'total_harga', 'jaminan_identitas', 'pelanggan_id', 'kendaraan_id', 'persetujuan','user_id'];[m
+ [m
+     public function rules()[m
+     {[m
+[1mdiff --git a/app/Views/customer/dashboard.php b/app/Views/customer/dashboard.php[m
+[1mindex 20686d0..4fe71af 100644[m
+[1m--- a/app/Views/customer/dashboard.php[m
+[1m+++ b/app/Views/customer/dashboard.php[m
+[36m@@ -96,23 +96,34 @@[m [ma {[m
+ [m
+ }[m
+ [m
+[31m-[m
+ .btn {[m
+[31m-    width: 50%;[m
+[31m-    padding: 10px;[m
+[31m-    margin-left: 20px;[m
+[31m-    font-size: 16px;[m
+[31m-    font-weight: bold;[m
+[31m-    border-radius: 5px;[m
+[31m-    background: linear-gradient(135deg, #007bff, #0056b3);[m
+[31m-    border: none;[m
+[32m+[m[32m    display: inline-block;[m
+[32m+[m[32m    padding: 10px 24px;[m
+[32m+[m[32m    background-color: #007bff;[m
+[32m+[m[32m    /* Biru bootstrap */[m
+     color: white;[m
+[31m-    transition: all 0.3s ease;[m
+[32m+[m[32m    font-weight: 600;[m
+[32m+[m[32m    text-decoration: none;[m
+[32m+[m[32m    border-radius: 6px;[m
+[32m+[m[32m    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);[m
+[32m+[m[32m    transition: background-color 0.3s ease, box-shadow 0.3s ease;[m
+[32m+[m[32m    cursor: pointer;[m
+[32m+[m[32m    user-select: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.btn:hover,[m
+[32m+[m[32m.btn:focus {[m
+[32m+[m[32m    color: #fff;[m
+[32m+[m[32m    background-color: #0056b3;[m
+[32m+[m[32m    box-shadow: 0 6px 10px rgba(0, 86, 179, 0.4);[m
+[32m+[m[32m    text-decoration: none;[m
+[32m+[m[32m    outline: none;[m
+ }[m
+ [m
+[31m-.btn:hover {[m
+[31m-    background: linear-gradient(135deg, #0056b3, #007bff);[m
+[31m-    transform: scale(1.05);[m
+[32m+[m[32m.btn:active {[m
+[32m+[m[32m    background-color: #004494;[m
+[32m+[m[32m    box-shadow: 0 3px 6px rgba(0, 68, 148, 0.5);[m
+[32m+[m[32m    transform: translateY(1px);[m
+ }[m
+ [m
+ .dropdown-item {[m
+[36m@@ -216,7 +227,7 @@[m [ma {[m
+ [m
+                     <div class="hero-content">[m
+                         <h2 class="h1 hero-title">[m
+[31m-                            <?= session()->get('username') ? 'Selamat Datang  ' . esc(session()->get('user_id')) : 'Welcome, Guest'; ?>[m
+[32m+[m[32m                            <?= session()->get('username') ? 'Selamat Datang  ' . esc(session()->get('username')) : 'Welcome, Guest'; ?>[m
+                         </h2>[m
+ [m
+                         <h3 class="h2 hero-text">Instarent solusi terbaik </h3>[m
+[1mdiff --git a/app/Views/customer/detail.php b/app/Views/customer/detail.php[m
+[1mindex 2295ba7..aef1707 100644[m
+[1m--- a/app/Views/customer/detail.php[m
+[1m+++ b/app/Views/customer/detail.php[m
+[36m@@ -4,7 +4,6 @@[m
+ <!-- Link Bootstrap & CSS Tambahan -->[m
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">[m
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">[m
+[31m-<link rel="stylesheet" href="<?= base_url('assets/css/detail.css') ?>">[m
+ <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">[m
+ [m
+ <div class="container">[m
+[36m@@ -63,8 +62,8 @@[m
+             </div>[m
+ [m
+             <!-- Form Pelanggan -->[m
+[31m-            <div class="col-md-6">[m
+[31m-                <form action="/customer/store" method="post" id="pelangganForm">[m
+[32m+[m[32m            <div class="col-md-6 bg-white">[m
+[32m+[m[32m                <form action="/customer/store" method="post" id="pelangganForm" class="col-md-6 bg-white">[m
+                     <center>[m
+                         <h4>Formulir Data Pelanggan</h4>[m
+                     </center>[m
+[1mdiff --git a/app/Views/riwayat/index.php b/app/Views/riwayat/index.php[m
+[1mindex 440ab31..6ec9b0e 100644[m
+[1m--- a/app/Views/riwayat/index.php[m
+[1m+++ b/app/Views/riwayat/index.php[m
+[36m@@ -1,31 +1,134 @@[m
+ <?= $this->extend('template/layout') ?>[m
+ <?= $this->section('content') ?>[m
+ [m
+[31m-<!-- Link Bootstrap & CSS Tambahan -->[m
+[32m+[m[32m<!-- Bootstrap & FontAwesome -->[m[41m[m
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">[m
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">[m
+[31m-<link rel="stylesheet" href="<?= base_url('assets/css/detail.css') ?>">[m
+[31m-<link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>">[m
+ [m
+[31m-<div class="container">[m
+[31m-    <style>[m
+[31m-    .breadcrumb-item+.breadcrumb-item::before {[m
+[31m-        content: none;[m
+[31m-    }[m
+[31m-    </style>[m
+[32m+[m[32m<style>[m[41m[m
+[32m+[m[32m/* Container utama */[m[41m[m
+[32m+[m[32m.container-custom {[m[41m[m
+[32m+[m[32m    max-width: 900px;[m[41m[m
+[32m+[m[32m    margin: 40px auto;[m[41m[m
+[32m+[m[32m    padding: 0 20px;[m[41m[m
+[32m+[m[32m    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;[m[41m[m
+[32m+[m[32m    color: #333;[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32ma {[m[41m[m
+[32m+[m[32m    text-decoration: none;[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m.breadcrumb-item+.breadcrumb-item::before {[m[41m[m
+[32m+[m[32m    content: none;[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/* Breadcrumb custom */[m[41m[m
+[32m+[m[32m.breadcrumb-custom .breadcrumb {[m[41m[m
+[32m+[m[32m    background-color: transparent;[m[41m[m
+[32m+[m[32m    padding: 0;[m[41m[m
+[32m+[m[32m    margin-bottom: 30px;[m[41m[m
+[32m+

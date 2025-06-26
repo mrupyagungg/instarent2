@@ -1,0 +1,477 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    padding-left: 1px;
+}
+
+  
+a {
+    text-decoration: none;
+}
+
+h2,
+h4 {
+    color: #343a40;
+}
+
+p {
+    line-height: 1.6;
+    color: #6c757d;
+}
+
+/* Vehicle Detail Section */
+#home {
+    margin-top: 50px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#home .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 10px auto;  /* Margin auto untuk jarak kiri kanan */
+
+}
+
+#home .col {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 10px;  /* Margin auto untuk jarak kiri kanan */
+
+}
+
+#home .col img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.form-header {
+    color: black;
+    background-color: #f8f9fa;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.btn-warning {
+    background-color:rgb(255, 255, 255);
+    color:rgb(9, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    /* text-transform: uppercase; */
+    font-weight: bold;
+}
+
+.btn-warning:hover {
+    background-color:rgb(252, 189, 0);
+    color: black;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 1em;
+    width: 100%;
+    /* margin-bottom: 15px; */
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.form-header {
+    font-size: 1.5em;
+    color:rgb(255, 255, 255);
+    margin-bottom: 20px;
+    text-align: center;
+    background-color:rgb(4, 0, 128);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Breadcrumb container styling */
+.breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 10px; /* Padding atas bawah dan kiri kanan */
+    margin: 10px auto;  /* Margin auto untuk jarak kiri kanan */
+    width: 80%; /* Menyesuaikan lebar breadcrumb agar tidak melewati halaman */
+}
+
+/* Individual breadcrumb items */
+.breadcrumb-item {
+    flex: 1;
+    text-align: center;
+    padding: 20px 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+    color: #666;
+    border-right: 1px solid #ddd;
+}
+
+.breadcrumb-item:last-child {
+    border-right: none;
+}
+
+/* Active item styling */
+.breadcrumb-item.active {
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+}
+
+/* Container styling for icons */
+.payment-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styling each icon image */
+.payment-icons img {
+    width: 400px; /* Set the width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within the box */
+    transition: transform 0.3s ease; /* Add hover effect */
+}
+
+/* Hover effect to scale icon */
+.payment-icons img:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon */
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #f5c518;
+}
+.footer-title-insta {
+    font-family: 'Lobster', cursive;
+  font-size: 35px;
+  color: #f5c518;
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 14px;
+    line-height: 2;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #f5c518;
+}
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.social-link {
+    color: #ccc;
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-link:hover {
+    color: #f5c518;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+/* alert */
+/* CSS untuk Alert Success */
+.custom-alert {
+    background-color: #28a745; /* Warna hijau untuk alert success */
+    color: #fff; /* Teks berwarna putih */
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+.alert-danger {
+    background-color:rgb(255, 0, 0); /* Warna hijau untuk alert success */
+    color: #fff; /* Teks berwarna putih */
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+/* Hover effect untuk tombol close */
+.custom-alert .close-btn:hover {
+    color: #dcdcdc;
+}
+
+/* Untuk menampilkan efek fade */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Efek Fade */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Header feedback */
+.col .form-header {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Container feedback */
+.col .feedback-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden; /* Menyembunyikan elemen di luar tampilan */
+    height: 460px; /* Sesuaikan tinggi dengan kebutuhan */
+    position: relative;
+}
+
+/* Grup feedback */
+.col .feedback-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.8s ease-in-out;
+}
+
+.col .feedback-group.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Item feedback */
+.col .feedback-item {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.col .feedback-item p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.col .feedback-item p strong {
+    color: #222;
+}
+
+#btnSimpan:hover {
+    background-color: #28a745; /* Warna hijau lebih cerah */
+    transform: scale(1.02); /* Sedikit pembesaran */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Form container */
+#pelangganForm {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Label styling */
+  #pelangganForm .form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #333;
+  }
+  
+  /* Input, textarea, and select styling */
+  #pelangganForm .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: 0.3s;
+    background-color: #fdfdfd;
+  }
+  
+  #pelangganForm .form-control:focus {
+    border-color: #4f46e5; /* Indigo */
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+    background-color: #fff;
+    outline: none;
+  }
+  
+  /* Textarea adjustment */
+  #pelangganForm textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Button style */
+  #pelangganForm button[type="submit"] {
+    background-color: #4f46e5;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #pelangganForm button[type="submit"]:hover {
+    background-color: #4338ca;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    #pelangganForm {
+      background-color: #1e1e2f;
+      color: #eee;
+    }
+  
+    #pelangganForm .form-label {
+      color: #ccc;
+    }
+  
+    #pelangganForm .form-control {
+      background-color: #2a2a40;
+      color: #eee;
+      border-color: #444;
+    }
+  
+    #pelangganForm .form-control:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.2);
+    }
+  
+    #pelangganForm button[type="submit"] {
+      background-color: #6366f1;
+    }
+  
+    #pelangganForm button[type="submit"]:hover {
+      background-color: #4f46e5;
+    }
+  }
