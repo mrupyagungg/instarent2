@@ -92,6 +92,7 @@ $routes->group('pemesanan', ['filter' => 'auth'], function($routes) {
     $routes->get('nota/(:num)', 'Pemesanan::nota/$1');
 });
 
+
 $routes->get('pemesanan/index', 'Pemesanan::index');
 $routes->get('pemesanan/index(:num)', 'Pemesanan::index/$1');
 $routes->get('pemesanan/add_data_pemesanan', 'Pemesanan::create');
@@ -157,12 +158,16 @@ $routes->match(['get', 'post'], 'pemesanan/create/(:num)', 'Pemesanan::create/$1
 // laporan
 $routes->get('buku-besar/download/pdf/(:num)/(:num)/(:num)', 'Laporan\BukuBesar::downloadPdf/$1/$2/$3');
 $routes->get('buku-besar/download/excel/(:num)/(:num)/(:num)', 'Laporan\BukuBesar::downloadExcel/$1/$2/$3');
-
 $routes->get('jurnal/download/pdf/(:num)/(:num)', 'Laporan\Jurnal::downloadPDF/$1/$2');
 $routes->get('jurnal/download/excel/(:num)/(:num)', 'Laporan\Jurnal::downloadExcel/$1/$2');
-
 $routes->get('laba-rugi/pdf/(:num)/(:num)', 'Laporan\LabaRugi::downloadPDF/$1/$2');
 $routes->get('laba-rugi/excel/(:num)/(:num)', 'Laporan\LabaRugi::downloadExcel/$1/$2');
+
+$routes->get('pemesanan/cariPelanggan', 'Pemesanan::cariPelanggan');
+$routes->post('pemesanan/add', 'Pemesanan::add');
+
+
+
 
 
 // Additional routes for environment-specific configs

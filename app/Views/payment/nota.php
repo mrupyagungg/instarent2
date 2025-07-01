@@ -108,9 +108,10 @@
     </div>
 
     <p><strong>Tanggal Pembayaran: </strong> <?= esc($tanggal_pemesanan) ?></p>
-    <p><strong>No. Pembayaran: </strong>INS/INV/<?= esc($kode_pemesanan) ?></p>
+    <p><strong>No. Pembayaran: </strong>INS/BDG/<?= esc($kode_pemesanan) ?></p>
     <p><strong>Nama Pelanggan: </strong> <?= esc($nama_pelanggan) ?></p>
-    <p><strong>Email: </strong> <?= esc($email_pelanggan) ?></p>
+    <p><strong>Email: </strong> <span
+            style="color: blue; text-decoration: underline;"><?= esc($email_pelanggan) ?></span></p>
     <p><strong>No. Telp: </strong> <?= esc($no_telp_pelanggan) ?></p>
 
     <table>

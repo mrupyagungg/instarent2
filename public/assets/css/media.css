@@ -1,0 +1,95 @@
+/* media.css */
+/* ===============================
+   OVERLAY
+   =============================== */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* ===============================
+   NAV TOGGLE BUTTON
+   =============================== */
+.nav-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.nav-toggle-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Optional: Animate lines on toggle */
+.nav-toggle-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.nav-toggle-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ===============================
+   MOBILE NAVBAR
+   =============================== */
+@media (max-width: 991.98px) {
+  .navbar {
+    display: none;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .navbar.active {
+    display: flex;
+  }
+
+  .navbar-list {
+    flex-direction: column;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .navbar-list li {
+    margin-bottom: 12px;
+  }
+
+  .navbar-link {
+    color: #333;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    display: block;
+  }
+
+  .navbar-link:hover {
+    color: #007bff;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+  }
+}

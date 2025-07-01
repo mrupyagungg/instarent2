@@ -134,4 +134,10 @@ class KendaraanModel extends Model
     {
         return $this->delete($id);
     }
+    
+    public function getAll()
+    {
+        return $this->findAll();
+    }
+
 }

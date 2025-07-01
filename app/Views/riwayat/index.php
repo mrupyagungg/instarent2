@@ -161,7 +161,7 @@ a {
                             <th>Tanggal</th>
                             <th>Lama Pesan</th>
                             <th>Total Harga</th>
-                            <th>Status</th>
+                            <th>Payment</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -279,7 +279,7 @@ a {
                                                 <div class="col-sm-4"></div>
                                             </div>
                                             <div class="row mb-2">
-                                                <div class="col-sm-4 text-muted"><strong>Status</strong></div>
+                                                <div class="col-sm-4 text-muted"><strong>Status Payment</strong></div>
                                                 <div class="col-sm-4 fw-bold"> <?= ucwords(esc($r['status'])) ?>
                                                 </div>
                                                 <div class="col-sm-4"></div>
@@ -343,17 +343,40 @@ a {
                                             <div class="step-container last-step">
                                                 <input type="radio" class="form-check-input step-radio text-success"
                                                     <?= ($r['status_pesan'] == 'Selesai') ? 'checked' : '' ?> disabled>
+
                                                 <div class="row">
                                                     <div class="col-sm-4 text-muted">
                                                         <strong>Pengembalian Kendaraan</strong><br>
                                                         <small>Kendaraan dikembalikan sesuai waktu dan kondisi yang
                                                             telah disepakati.</small>
                                                     </div>
-                                                    <div class="col-sm-4 text-success">
-                                                        <?= ucwords(esc($r['status_pesan'])) ?>
+
+                                                    <div class="col-sm-4">
+                                                        <?php if ($r['status_pesan'] === 'pinjam'): ?>
+                                                        <span
+                                                            class="btn btn-danger btn-sm w-100 d-flex justify-content-center align-items-center"
+                                                            disabled>
+                                                            Sedang di pesan
+                                                        </span>
+                                                        <?php elseif ($r['status_pesan'] === 'Selesai'): ?>
+                                                        <span
+                                                            class="btn btn-success btn-sm w-100 d-flex justify-content-center align-items-center"
+                                                            disabled>
+                                                            Telah dikembalikan
+                                                        </span>
+                                                        <?php else: ?>
+                                                        <span
+                                                            class="btn btn-success btn-sm w-100 d-flex justify-content-center align-items-center"
+                                                            disabled>
+                                                            <?= ucwords(esc($r['status_pesan'])) ?>
+                                                        </span>
+                                                        <?php endif; ?>
                                                     </div>
+
+
                                                 </div>
                                             </div>
+
                                             <br>
                                             <hr>
                                             <!-- payment -->

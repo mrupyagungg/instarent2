@@ -76,6 +76,63 @@
     <script src="<?= base_url('assets/bundles/vendorscripts.bundle.js') ?>"></script>
 
     <script src="<?= base_url('assets/js/theme.js') ?>"></script>
+
+    <style>
+    /* Default: Desktop (>= 992px) sudah ditangani via Bootstrap */
+
+    @media (max-width: 991.98px) {
+
+        /* Untuk Tablet */
+        .auth-main {
+            padding: 20px;
+        }
+
+        .auth-box {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .card {
+            padding: 20px;
+        }
+
+        .top img {
+            width: 120px;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+
+        /* Untuk HP (Smartphone) */
+        .auth-box {
+            box-shadow: none;
+            border-radius: 0;
+            width: 100%;
+        }
+
+        .card {
+            padding: 16px;
+        }
+
+        .top img {
+            width: 100px;
+        }
+
+        .form-control {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .btn {
+            font-size: 15px;
+            padding: 10px 0;
+        }
+
+        .footer {
+            font-size: 14px;
+        }
+    }
+    </style>
 </body>
 
 </html>

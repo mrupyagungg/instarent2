@@ -6,213 +6,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title; ?></title>
-    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/icons/favicon.ico'); ?>">
-    <!-- 
-    - favicon
-  -->
-    <link rel="shortcut icon" href="<?= base_url('assets/images/brand/instarentlogopng.png') ?>" type="image/svg+xml">
 
-    <!-- 
-    - custom css link
-  -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/stylee.css') ?>">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/icons/favicon.ico'); ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/brand/instarentlogopng.png') ?>" type="image/png">
+
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
-    <script src="<?= base_url('assets/js/script.js') ?>"></script>
 
-    <!-- 
-    - google font link
-  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/stylee.css') ?>">
+
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Open+Sans&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Bootstrap 5 Bundle (Popper.js included) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoZ3HUHU9Y6hDJF8r2H9w5lZ1V6U61PoYvsmj4yj3jo8Hyc" crossorigin="anonymous">
+    </script>
+
+    <!-- Custom JS -->
+    <script src="<?= base_url('assets/js/script.js') ?>"></script>
 </head>
 
-<style>
-a {
-    text-decoration: none;
-}
-
-.navbar-header h3 {
-    font-family: 'Lobster', cursive;
-    font-size: 35px;
-    color: black;
-    outline: none;
-}
-
-.hero-forms {
-    /* max-width: 500px; */
-    background: rgba(255, 255, 255, 0.47);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-}
-
-.input-wrapper {
-    margin-bottom: 10px;
-}
-
-.input-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.input-field:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-    outline: none;
-}
-
-.info-box {
-    background-color: #d4f4fc;
-    /* Warna biru muda */
-    padding: 15px 15px;
-    /* Ruang di dalam box */
-    border-radius: 5px;
-    /* Agar sudutnya sedikit melengkung */
-    border-left: 4px solid #007bff;
-    /* Garis kiri berwarna biru */
-
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 24px;
-    background-color: #007bff;
-    /* Biru bootstrap */
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 6px;
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    user-select: none;
-}
-
-.btn:hover,
-.btn:focus {
-    color: #fff;
-    background-color: #0056b3;
-    box-shadow: 0 6px 10px rgba(0, 86, 179, 0.4);
-    text-decoration: none;
-    outline: none;
-}
-
-.btn:active {
-    background-color: #004494;
-    box-shadow: 0 3px 6px rgba(0, 68, 148, 0.5);
-    transform: translateY(1px);
-}
-
-.dropdown-item {
-    display: block;
-    padding: 8px 12px;
-    color: #333;
-    text-decoration: none;
-}
-
-.dropdown-item:hover {
-    background-color: #f0f0f0;
-}
-</style>
-
 <body?>
-
-    <!-- 
-    - #HEADER
-  -->
-
     <header class="header" data-header>
-        <div class="container">
+        <div class="container d-flex justify-content-between align-items-center">
 
-            <div class="overlay" data-overlay></div>
-
+            <!-- Logo / Brand -->
             <div class="navbar-header">
-                <h3>instarent</h3>
+                <h3 class="m-0">Instarent</h3>
             </div>
 
+            <!-- Hamburger Button -->
+            <button class="nav-toggle-btn d-md-none" data-nav-toggle-btn aria-label="Toggle Menu">
+                <span class="one"></span>
+                <span class="two"></span>
+                <span class="three"></span>
+            </button>
+
+            <!-- Navigation Links -->
             <nav class="navbar" data-navbar>
-                <ul class="navbar-list">
-
-                    <li>
-                        <a href="/customer/dashboard" class="navbar-link" data-nav-link>Home</a>
-                    </li>
-
-                    <li>
-                        <a href="/garasi" class="navbar-link" data-nav-link>Garasi</a>
-                    </li>
-
-                    <li>
-                        <a href="/about" class="navbar-link" data-nav-link>About us</a>
-                    </li>
-
-                    <li>
-                        <a href="/contact" class="navbar-link" data-nav-link>Contact us</a>
-                    </li>
-                    <li>
-                        <a href="/riwayat" class="navbar-link" data-nav-link>Riwayat</a>
-                    </li>
-
+                <ul class="navbar-list d-flex flex-column flex-md-row mb-0">
+                    <li><a href="/customer/dashboard" class="navbar-link" data-nav-link>Home</a></li>
+                    <li><a href="/garasi" class="navbar-link" data-nav-link>Garasi</a></li>
+                    <li><a href="/about" class="navbar-link" data-nav-link>About us</a></li>
+                    <li><a href="/contact" class="navbar-link" data-nav-link>Contact us</a></li>
+                    <li><a href="/riwayat" class="navbar-link" data-nav-link>Riwayat</a></li>
                 </ul>
-
             </nav>
 
-            <div class="header-actions">
-                <div class="header-actions">
-                    <div class="header-contact dropdown">
-                        <a href="#" class="contact-link dropdown-toggle" id="userDropdown" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <?= esc(session()->get('username')) ?>
-                        </a>
-                        <span class="contact-time d-block"><?= esc(session()->get('email')) ?></span>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="/profile">Profil</a>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    </div>
+            <!-- User Dropdown -->
+            <div class="header-contact dropdown ms-3">
+                <a href="#" class="contact-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <?= esc(session()->get('username')) ?>
+                </a>
+                <span class="contact-time d-block text-muted small"><?= esc(session()->get('email')) ?></span>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="/profile">Profil</a>
+                    <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
-
-                <!-- Bootstrap 4 CDN -->
-                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-                <button class="nav-toggle-btn" data-nav-toggle-btn aria-label="Toggle Menu">
-                    <span class="one"></span>
-                    <span class="two"></span>
-                    <span class="three"></span>
-                </button>
-
             </div>
 
         </div>
     </header>
+
 
     <main>
         <article>
@@ -240,25 +104,16 @@ a {
                         <script>
                         lucide.createIcons();
                         </script>
-
-
                     </div>
-
-                    <div class="hero-banner"></div>
-                    <!-- <button type="submit" class="btn"></button> -->
                     <a class="view-more-btn" href="#featured-car">SELENGKAPNYA</a>
                 </div>
 
             </section>
 
-            <!-- 
-        - #FEATURED CAR
-      -->
-
             <section class="section featured-car" id="featured-car">
                 <div class="container">
                     <div class="container text-center">
-                        <div class="row">
+                        <div class="row flex-column flex-md-row">
                             <div class="col-6">
                                 <div class="info-box">
                                     <h2 class="h2 section-title">Keterangan</h2>
@@ -477,7 +332,7 @@ a {
                             <h4 class="footer-title">Quick Links</h4>
                             <ul class="footer-links">
                                 <li><a href="/customer/dashboard" class="footer-link">Home</a></li>
-                                <li><a href="/customer/detail" class="footer-link">Explore Cars</a></li>
+                                <li><a href="/garasi" class="footer-link">Explore Cars</a></li>
                                 <li><a href="/about" class="footer-link">About Us</a></li>
                             </ul>
                         </div>
@@ -505,14 +360,34 @@ a {
             </footer>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/..."></script>
 
             <!-- js -->
             <script src="./assets/js/script.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-...your-integrity..." crossorigin="anonymous"></script>
 
             <!-- link icon -->
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+            <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const toggleBtn = document.querySelector('[data-nav-toggle-btn]');
+                const navbar = document.querySelector('[data-navbar]');
+
+                toggleBtn?.addEventListener("click", () => {
+                    navbar.classList.toggle("active");
+                });
+
+                document.querySelectorAll("[data-nav-link]").forEach(link => {
+                    link.addEventListener("click", () => {
+                        navbar.classList.remove("active");
+                    });
+                });
+            });
+            </script>
 
             </body>
+
 
 </html>

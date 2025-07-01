@@ -58,4 +58,10 @@ class PelangganModel extends Model
     {
         return $this->orderBy('id_pelanggan', 'DESC')->first();
     }
+    // Dalam file App/Models/PelangganModel.php
+    public function getAll()
+    {
+        return $this->findAll();
+    }
+
 }
