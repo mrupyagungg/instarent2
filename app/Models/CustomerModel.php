@@ -18,16 +18,15 @@ class CustomerModel extends Model
         'user_id'
     ];
 
-    // Validation rules
+        // Validation rules
     protected $validationRules = [
-        'nama_pelanggan'       => 'required|min_length[3]|is_unique[pelanggan.nama_pelanggan,{id_pelanggan}]',
-        'kode_pelanggan'       => 'required|is_unique[pelanggan.kode_pelanggan,{id_pelanggan}]',
-        'email_pelanggan'      => 'required|valid_email|is_unique[pelanggan.email_pelanggan,{id_pelanggan}]',
-        'no_telp_pelanggan'    => 'required|min_length[10]|numeric',
-        'alamat_pelanggan'     => 'required',
-        'jenis_kelamin_pelanggan' => 'required|in_list[Laki-laki,Perempuan]',
-        'user_id' => 'required|integer',
+        'nama_pelanggan' => 'permit_empty|min_length[3]',
+        'email_pelanggan' => 'permit_empty|valid_email',
+        'no_telp_pelanggan' => 'permit_empty|numeric',
+        'alamat_pelanggan' => 'permit_empty',
+        'jenis_kelamin_pelanggan' => 'permit_empty|in_list[Laki-laki,Perempuan]',
     ];
+
 
     // Custom error messages
     protected $validationMessages = [

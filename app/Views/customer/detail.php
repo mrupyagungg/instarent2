@@ -14,17 +14,6 @@
     </style>
 
     <div class="container mt-4">
-        <!-- Flash Message -->
-        <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success" id="success-alert">
-            <strong>Success!</strong> <?= session()->getFlashdata('success') ?>
-        </div>
-        <?php endif; ?>
-        <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger" id="error-alert">
-            <strong>Error!</strong> <?= session()->getFlashdata('error') ?>
-        </div>
-        <?php endif; ?>
 
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb ">
@@ -69,14 +58,14 @@
                     </center>
                     <?= csrf_field() ?>
                     <div class="mb-3">
-                        <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
+                        <label for="nama_pelanggan" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan"
-                            value="<?= old('nama_pelanggan', session()->get('username')) ?>" required>
+                            value="<?= old('nama_pelanggan', session()->get('username')) ?>" readonly required>
                     </div>
                     <div class="mb-3">
                         <label for="email_pelanggan" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email_pelanggan" name="email_pelanggan"
-                            value="<?= old('email_pelanggan', session()->get('email')) ?>" required>
+                            value="<?= old('email_pelanggan', session()->get('email')) ?>" readonly required>
                     </div>
                     <div class="mb-3">
                         <label for="no_telp_pelanggan" class="form-label">No Telepon</label>
@@ -136,6 +125,36 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('success-alert')?.remove();
         document.getElementById('error-alert')?.remove();
     }, 4000);
+});
+</script>
+<?php if (session()->getFlashdata('success')): ?>
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+
+            <div class="modal-body text-center py-5">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h4 class="text-success fw-bold mb-2">Berhasil!</h4>
+                <p class="text-muted"><?= session()->getFlashdata('success') ?></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<!-- Bootstrap JS (pastikan sudah ada di layout) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const successModalEl = document.getElementById('successModal');
+    if (successModalEl) {
+        const modal = new bootstrap.Modal(successModalEl);
+        modal.show();
+        setTimeout(() => {
+            modal.hide();
+        }, 3000);
+    }
 });
 </script>
 

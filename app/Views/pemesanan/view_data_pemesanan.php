@@ -27,12 +27,12 @@
                     <div class="body">
                         <div class="row">
                             <!-- Tombol Tambah (Trigger Modal) -->
-                            <div class="pl-3 mb-4">
+                            <!-- <div class="pl-3 mb-4">
                                 <button class="btn btn-block btn-primary" data-toggle="modal"
                                     data-target="#tambahPemesananModal">
                                     Tambah
                                 </button>
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -111,7 +111,7 @@
                     aria-labelledby="modalLabelTambah" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <form action="<?= base_url('pemesanan/add') ?>" method="post" enctype="multipart/form-data">
-                            <div class="modal-content">
+                            <?= csrf_field() ?> <div class="modal-content">
                                 <div class="modal-header bg-primary text-white">
                                     <h5 class="modal-title" id="modalLabelTambah">Tambah Pemesanan</h5>
                                     <button type="button" class="close text-white" data-dismiss="modal"
@@ -193,8 +193,8 @@
                                     <div class="mb-3">
                                         <label for="jaminan_identitas" class="form-label"><strong>Jaminan Identitas
                                                 (KTP/SIM):</strong></label>
-                                        <input type="file" id="jaminan_identitas" name="jaminan_identitas"
-                                            class="form-control" accept="image/*" required>
+                                        <input type="file" class="form-control" name="jaminan_identitas" required>
+
                                     </div>
                                 </div>
 

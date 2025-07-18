@@ -4,7 +4,13 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+<!-- ✅ Tambahan CSS jika ingin beri highlight kendaraan yang dipilih -->
+<style>
+.kendaraan-item.selected .card {
+    border: 2px solid #0d6efd;
+    background-color: #e7f1ff;
+}
+</style>
 <style>
 .breadcrumb {
     background-color: #f8f9fa;
@@ -61,7 +67,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Registrasi</li>
                 <li class="breadcrumb-item active" aria-current="page">Pesan</li>
-                <li class="breadcrumb-item"><a href="<?= base_url('bayar') ?>">Bayar</a></li>
+                <li class="breadcrumb-item">Bayar</a></li>
             </ol>
         </nav>
 
@@ -123,19 +129,6 @@
                 </div>
             </div>
 
-            <!-- Ringkasan -->
-            <hr class="mt-5">
-            <h5>🔎 Ringkasan Pemesanan</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Kode Pemesanan:</strong> <?= esc($kode_pemesanan) ?></li>
-                <li class="list-group-item"><strong>Tanggal Pemesanan:</strong> <?= date('d-m-Y') ?></li>
-                <li class="list-group-item"><strong>Tanggal Sewa:</strong> <span id="ringkasanTanggal">-</span></li>
-                <li class="list-group-item"><strong>Durasi Sewa:</strong> <span id="ringkasanDurasi">0 hari</span></li>
-                <li class="list-group-item"><strong>Kendaraan Dipilih:</strong>
-                    <?= esc($kendaraanDipilih['nama_kendaraan']) ?></li>
-                <li class="list-group-item"><strong>Total Harga:</strong> <span id="ringkasanHarga">Rp0</span></li>
-            </ul>
-
             <!-- Total Harga -->
             <div class="mb-3">
                 <label for="total_harga" class="form-label">Total Harga Yang Harus Anda Bayar</label>
@@ -151,43 +144,54 @@
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
-
         <script>
-        let hargaPerHari = <?= (int)$kendaraanDipilih['harga_sewa_kendaraan'] ?>;
+        document.addEventListener('DOMContentLoaded', function() {
+            const tanggalAwalInput = document.getElementById('tanggal_awal');
+            const tanggalAkhirInput = document.getElementById('tanggal_akhir');
+            const lamaPemesananInput = document.getElementById('lama_pemesanan');
+            const totalHargaInput = document.getElementById('total_harga');
 
-        function hitungDurasiDanTotal() {
-            const tglAwal = document.getElementById('tanggal_awal').value;
-            const tglAkhir = document.getElementById('tanggal_akhir').value;
+            const hargaPerHari = <?= (int)$kendaraanDipilih['harga_sewa_kendaraan'] ?>;
 
-            if (tglAwal && tglAkhir) {
-                const date1 = new Date(tglAwal);
-                const date2 = new Date(tglAkhir);
-                const selisih = (date2 - date1) / (1000 * 3600 * 24) + 1;
+            // Atur batas minimal tanggal awal dan akhir ke hari ini
+            const today = new Date().toISOString().split('T')[0];
+            tanggalAwalInput.setAttribute('min', today);
+            tanggalAkhirInput.setAttribute('min', today);
 
-                const lama = selisih > 0 ? selisih : 0;
-                document.getElementById('lama_pemesanan').value = lama;
+            tanggalAwalInput.addEventListener('change', function() {
+                tanggalAkhirInput.setAttribute('min', tanggalAwalInput.value);
+                hitungDurasiDanTotal();
+            });
 
-                const total = lama * hargaPerHari;
-                document.getElementById('total_harga').value = total;
+            tanggalAkhirInput.addEventListener('change', hitungDurasiDanTotal);
 
-                // Ringkasan
-                document.getElementById('ringkasanTanggal').textContent = `${tglAwal} s/d ${tglAkhir}`;
-                document.getElementById('ringkasanDurasi').textContent = `${lama} hari`;
-                document.getElementById('ringkasanHarga').textContent = `Rp${total.toLocaleString('id-ID')}`;
+            function hitungDurasiDanTotal() {
+                const tglAwal = new Date(tanggalAwalInput.value);
+                const tglAkhir = new Date(tanggalAkhirInput.value);
+
+                if (!isNaN(tglAwal) && !isNaN(tglAkhir)) {
+                    if (tglAkhir < tglAwal) {
+                        alert('Tanggal akhir tidak boleh sebelum tanggal awal.');
+                        tanggalAkhirInput.value = '';
+                        lamaPemesananInput.value = '';
+                        totalHargaInput.value = '';
+                        return;
+                    }
+
+                    const selisihHari = Math.floor((tglAkhir - tglAwal) / (1000 * 3600 * 24));
+                    let lama = 1;
+                    if (selisihHari >= 2) {
+                        lama = selisihHari;
+                    }
+
+                    const total = lama * hargaPerHari;
+                    lamaPemesananInput.value = lama;
+
+                    // Format hanya tampilan (Rp xxx.xxx)
+                    totalHargaInput.value = `Rp ${total.toLocaleString('id-ID')}`;
+                }
             }
-        }
-
-        // Jalankan fungsi saat tanggal diubah
-        document.getElementById('tanggal_awal').addEventListener('change', hitungDurasiDanTotal);
-        document.getElementById('tanggal_akhir').addEventListener('change', hitungDurasiDanTotal);
+        });
         </script>
 
-
-        <!-- ✅ Tambahan CSS jika ingin beri highlight kendaraan yang dipilih -->
-        <style>
-        .kendaraan-item.selected .card {
-            border: 2px solid #0d6efd;
-            background-color: #e7f1ff;
-        }
-        </style>
         <?= $this->endSection() ?>

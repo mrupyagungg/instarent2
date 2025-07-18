@@ -38,9 +38,10 @@ $routes->get('/register', 'Register::index');
 $routes->post('/register/save', 'Register::save');
 
 // Customer
-$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
+$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth:1']);
 $routes->get('/customer/dashboard', 'Customer::index', ['filter' => 'auth']);
 $routes->post('customer/store', 'Customer::store');
+$routes->get('/unauthorized', 'Login::unauthorized');
 
 
 // COA routes
@@ -166,6 +167,8 @@ $routes->get('laba-rugi/excel/(:num)/(:num)', 'Laporan\LabaRugi::downloadExcel/$
 $routes->get('pemesanan/cariPelanggan', 'Pemesanan::cariPelanggan');
 $routes->post('pemesanan/add', 'Pemesanan::add');
 
+$routes->get('customer/profile', 'Customer::profile');
+$routes->post('customer/updateProfile', 'Customer::updateProfile');
 
 
 

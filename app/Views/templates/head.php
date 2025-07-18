@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/vendor/themify-icons/themify-icons.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/fontawesome/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
 
     <link rel="stylesheet" href="<?= base_url('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/vendor/charts-c3/plugin.css') ?>" />
@@ -28,13 +29,13 @@
 
 <body class="theme-indigo">
     <!-- Page Loader -->
-    <div class="page-loader-wrapper">
+    <!-- <div class="page-loader-wrapper">
         <div class="loader">
             <div class="m-t-30"><img src="<?= base_url('assets/images/prv/cars.gif') ?>" width="300" height="300"
                     alt="ArrOw"></div>
             <p><b>...</b></p>
         </div>
-    </div>
+    </div> -->
     <?= $this->include('templates/navbar'); ?>
 
 

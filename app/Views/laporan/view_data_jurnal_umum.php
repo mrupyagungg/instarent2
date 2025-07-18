@@ -126,28 +126,48 @@ tfoot th,
                     </thead>
                     <tbody>
                         <?php if (!empty($jurnal) && is_array($jurnal)): ?>
-                        <?php $totalDebit = 0; $totalKredit = 0; ?>
-                        <?php foreach ($jurnal as $data_jurnal): ?>
                         <?php
-                        $totalDebit += $data_jurnal['nominal'];
-                        $totalKredit += $data_jurnal['nominal'];
-                    ?>
-                        <!-- Baris Kas (Debit) -->
+                            $grouped = [];
+                            $totalDebit = 0;
+                            $totalKredit = 0;
+
+                            // Kelompokkan berdasarkan kode transaksi (reff)
+                            foreach ($jurnal as $entry) {
+                                $grouped[$entry['reff']][] = $entry;
+                            }
+
+                            foreach ($grouped as $reff => $entries):
+                                // Pisahkan posisi debit & kredit
+                                $debitEntry = null;
+                                $kreditEntry = null;
+
+                                foreach ($entries as $e) {
+                                    if ($e['posisi'] === 'd') {
+                                        $debitEntry = $e;
+                                        $totalDebit += $e['nominal'];
+                                    } elseif ($e['posisi'] === 'k') {
+                                        $kreditEntry = $e;
+                                        $totalKredit += $e['nominal'];
+                                    }
+                                }
+                            ?>
+                        <!-- Baris Debit -->
                         <tr>
-                            <td><?= esc(format_date($data_jurnal['tanggal'])) ?></td>
-                            <td><strong>Kas</strong></td>
-                            <td class="text-center"><?= esc($data_jurnal['id_akun']) ?></td>
-                            <td class="text-end"><?= nominal($data_jurnal['nominal']) ?></td>
+                            <td><?= esc(format_date($debitEntry['tanggal'] ?? '')) ?></td>
+                            <td><strong><?= esc($debitEntry['transaksi'] ?? '') ?></strong></td>
+                            <td class="text-center"><?= esc($debitEntry['id_akun'] ?? '') ?></td>
+                            <td class="text-end"><?= nominal($debitEntry['nominal'] ?? 0) ?></td>
                             <td class="text-end"></td>
                         </tr>
 
-                        <!-- Baris Pendapatan Sewa (Kredit) -->
+                        <!-- Baris Kredit -->
                         <tr>
                             <td></td>
-                            <td style="padding-left: 2px;"><strong>Pendapatan Sewa</strong></td>
-                            <td class="text-center"><?= esc($data_jurnal['id_akun']) ?></td>
+                            <td style="padding-left: 2px;"><strong><?= esc($kreditEntry['transaksi'] ?? '') ?></strong>
+                            </td>
+                            <td class="text-center"><?= esc($kreditEntry['id_akun'] ?? '') ?></td>
                             <td class="text-end"></td>
-                            <td class="text-end"><?= nominal($data_jurnal['nominal']) ?></td>
+                            <td class="text-end"><?= nominal($kreditEntry['nominal'] ?? 0) ?></td>
                         </tr>
                         <?php endforeach; ?>
                         <?php else: ?>
@@ -156,6 +176,7 @@ tfoot th,
                         </tr>
                         <?php endif; ?>
                     </tbody>
+
                     <tfoot>
                         <tr>
                             <th colspan="3" class="text-end">Total</th>
@@ -163,6 +184,8 @@ tfoot th,
                             <th class="text-end"><?= nominal($totalKredit ?? 0) ?></th>
                         </tr>
                     </tfoot>
+
+
                 </table>
             </div>
 

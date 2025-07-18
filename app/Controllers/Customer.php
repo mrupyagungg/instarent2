@@ -109,7 +109,7 @@ class Customer extends BaseController
         }
     
         session()->setFlashdata('success', 'Data pelanggan berhasil disimpan.');
-        return redirect()->to('/detail/1');
+        return redirect()->to('/gaasi');
     }
 
 
@@ -249,4 +249,60 @@ class Customer extends BaseController
 
         return view('customer/detail', $data);
     }
+
+    public function profile()
+    {
+        $customerModel = new CustomerModel();
+        $userId = session()->get('user_id'); // user_id dari login session
+
+        if (!$userId) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Ambil data berdasarkan user_id (bukan primary key)
+        $user = $customerModel->where('user_id', $userId)->first();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Data pelanggan tidak ditemukan.');
+        }
+
+        return view('customer/profile', ['user' => $user]);
+    }
+
+   public function updateProfile()
+{
+    $customerModel = new \App\Models\CustomerModel();
+    $userId = session()->get('user_id');
+
+    if (!$userId) {
+        return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $data = [
+        'nama_pelanggan'            => $this->request->getPost('nama_pelanggan'),
+        'email_pelanggan'           => $this->request->getPost('email_pelanggan'),
+        'no_telp_pelanggan'         => $this->request->getPost('no_telp_pelanggan'),
+        'alamat_pelanggan'          => $this->request->getPost('alamat_pelanggan'),
+        'jenis_kelamin_pelanggan'   => $this->request->getPost('jenis_kelamin_pelanggan'),
+    ];
+
+    // Debug: tampilkan data yang akan diupdate
+    // dd($data, $userId);
+
+    $updated = $customerModel->where('user_id', $userId)->update(null, $data);
+
+    // Jika gagal update, tampilkan error dari model
+    if ($updated === false) {
+        // Debug dengan dump langsung
+        dd('Update gagal', $customerModel->errors(), $customerModel->getLastQuery());
+
+        // Atau log ke log file jika tidak ingin pakai dd
+        // log_message('error', 'Update gagal: ' . print_r($customerModel->errors(), true));
+        // return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data.');
+    }
+
+    return redirect()->to('/customer/profile')->with('success', 'Profil berhasil diperbarui.');
+}
+
+
 }

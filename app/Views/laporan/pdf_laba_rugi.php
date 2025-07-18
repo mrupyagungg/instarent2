@@ -96,7 +96,7 @@
             </tr>
 
             <tr>
-                <td class="bold"><?= $laba_bersih >= 0 ? 'Laba Bersih' : 'Rugi Bersih' ?></td>
+                <td class="bold"><?= $laba_bersih >= 0 ? 'Laba ' : 'Rugi ' ?></td>
                 <td class="text-right bold"><?= nominal($laba_bersih) ?></td>
             </tr>
         </tbody>

@@ -120,11 +120,11 @@ class Pemesanan extends BaseController
                 $jurnal = [
                     [
                         'tanggal' => date('Y-m-d'),
-                        'id_akun' => 102,
+                        'id_akun' => 101,
                         'nominal' => $total_harga,
                         'posisi' => 'd',
                         'reff' => $kode_pemesanan,
-                        'transaksi' => 'Bank',
+                        'transaksi' => 'Kas',
                     ],
                     [
                         'tanggal' => date('Y-m-d'),
@@ -151,51 +151,73 @@ class Pemesanan extends BaseController
         ]);
     }
 
-    public function add()
-    {
-        $validationRules = [
-            'pelanggan_id' => 'required',
-            'kendaraan_id' => 'required',
-            'tanggal_awal' => 'required|valid_date[Y-m-d]',
-            'tanggal_akhir' => 'required|valid_date[Y-m-d]',
-            'total_harga' => 'required|numeric',
-            'jaminan_identitas' => 'uploaded[jaminan_identitas]|is_image[jaminan_identitas]|mime_in[jaminan_identitas,image/jpg,image/jpeg,image/png]|max_size[jaminan_identitas,2048]',
-        ];
+   public function add()
+{
+    $this->pemesanans = new \App\Models\PemesananModel();
 
-        if (!$this->validate($validationRules)) {
-            return redirect()->back()->withInput()->with('validation', $this->validator);
-        }
+    // Validasi input
+    $validationRules = [
+        'pelanggan_id'          => 'required',
+        'kendaraan_id'          => 'required',
+        'tanggal_awal'          => 'required|valid_date[Y-m-d]',
+        'tanggal_akhir'         => 'required|valid_date[Y-m-d]',
+        'total_harga'           => 'required|numeric',
+        'lama_pemesanan'        => 'required|numeric',
+        'jaminan_identitas'     => 'uploaded[jaminan_identitas]|is_image[jaminan_identitas]|mime_in[jaminan_identitas,image/jpg,image/jpeg,image/png]|max_size[jaminan_identitas,2048]',
+    ];
 
-        $kodePemesanan = $this->generateKodePemesanan();
-
-        $jaminanIdentitas = $this->request->getFile('jaminan_identitas');
-        $jaminanIdentitasPath = '';
-
-        if ($jaminanIdentitas && $jaminanIdentitas->isValid() && !$jaminanIdentitas->hasMoved()) {
-            $newName = $jaminanIdentitas->getRandomName(); // Gunakan nama acak
-            $jaminanIdentitas->move('uploads/images/', $newName);
-            $jaminanIdentitasPath = 'uploads/images/' . $newName;
-        } else {
-            return redirect()->back()->withInput()->with('error', 'Upload jaminan identitas gagal.');
-        }
-
-        $pemesananData = [
-            'pelanggan_id' => $this->request->getPost('pelanggan_id'),
-            'kode_pemesanan' => $kodePemesanan,
-            'kendaraan_id' => $this->request->getPost('kendaraan_id'),
-            'tanggal_awal' => $this->request->getPost('tanggal_awal'),
-            'tanggal_akhir' => $this->request->getPost('tanggal_akhir'),
-            'total_harga' => $this->request->getPost('total_harga'),
-            'lama_pemesanan' => $this->request->getPost('lama_pemesanan'),
-            'jaminan_identitas' => $jaminanIdentitasPath,
-        ];
-
-        if ($this->pemesanans->save($pemesananData)) {
-            return redirect()->to('/customer/detail')->with('success', 'Pemesanan berhasil.');
-        } else {
-            return redirect()->back()->with('old', $this->request->getPost());
-        }
+    if (!$this->validate($validationRules)) {
+        log_message('error', 'Validasi Gagal: ' . json_encode($this->validator->getErrors()));
+        return redirect()->back()->withInput()->with('validation', $this->validator);
     }
+
+    // Proses upload file
+    $jaminanIdentitas = $this->request->getFile('jaminan_identitas');
+    $jaminanIdentitasPath = '';
+
+    if (!is_dir(ROOTPATH . 'uploads/images/')) {
+        mkdir(ROOTPATH . 'uploads/images/', 0777, true);
+    }
+
+    if ($jaminanIdentitas && $jaminanIdentitas->isValid() && !$jaminanIdentitas->hasMoved()) {
+        $newName = $jaminanIdentitas->getRandomName();
+        $jaminanIdentitas->move(ROOTPATH . 'uploads/images/', $newName);
+        $jaminanIdentitasPath = 'uploads/images/' . $newName;
+        log_message('debug', 'File berhasil diupload ke: ' . $jaminanIdentitasPath);
+    } else {
+        log_message('error', 'Upload file gagal.');
+        return redirect()->back()->withInput()->with('error', 'Upload jaminan identitas gagal.');
+    }
+
+    // Generate kode pemesanan
+    $kodePemesanan = $this->generateKodePemesanan();
+
+    // Siapkan data
+    $pemesananData = [
+        'pelanggan_id'      => $this->request->getPost('pelanggan_id'),
+        'kode_pemesanan'    => $kodePemesanan,
+        'kendaraan_id'      => $this->request->getPost('kendaraan_id'),
+        'tanggal_awal'      => $this->request->getPost('tanggal_awal'),
+        'tanggal_akhir'     => $this->request->getPost('tanggal_akhir'),
+        'total_harga'       => $this->request->getPost('total_harga'),
+        'lama_pemesanan'    => $this->request->getPost('lama_pemesanan'),
+        'jaminan_identitas' => $jaminanIdentitasPath,
+    ];
+
+    // DEBUG: Tampilkan isi input & file sebelum disimpan
+    dd([
+        'POST' => $this->request->getPost(),
+        'File Path' => $jaminanIdentitasPath,
+        'Pemesanan Data' => $pemesananData
+    ]);
+
+    // Simpan ke database
+if (!$this->validate($rules)) {
+    log_message('error', 'Validasi gagal: ' . json_encode($this->validator->getErrors()));
+    return redirect()->back()->with('validation', $this->validator); // TANPA withInput()
+}
+
+}
 
 
 

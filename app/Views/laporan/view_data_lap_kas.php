@@ -125,7 +125,7 @@
 
                                     <?php $laba_bersih = $total_pendapatan - $total_beban; ?>
                                     <tr>
-                                        <td><b><?= $laba_bersih >= 0 ? 'Laba Bersih' : 'Rugi Bersih' ?></b></td>
+                                        <td><b><?= $laba_bersih >= 0 ? 'Total Laba' : 'Total Rugi' ?></b></td>
                                         <td class="text-center"><b><?= nominal($laba_bersih) ?></b></td>
                                     </tr>
                                     <?php else: ?>

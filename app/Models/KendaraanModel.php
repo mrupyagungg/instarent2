@@ -108,7 +108,7 @@ class KendaraanModel extends Model
         $builder->whereNotIn('id_kendaraan', function ($subQuery) {
             return $subQuery->select('kendaraan_id')
                 ->from('pemesanan')
-                ->where('status_pesan', 'pesan'); // kendaraan yang sedang dipesan akan disembunyikan
+                ->where('status_pesan', 'pinjam'); // kendaraan yang sedang dipesan akan disembunyikan
         });
 
         // Hanya tampilkan kendaraan yang ready (opsional)

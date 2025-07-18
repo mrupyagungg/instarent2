@@ -8,19 +8,31 @@ use CodeIgniter\Filters\FilterInterface;
 
 class Auth implements FilterInterface
 {
+  // app/Filters/Auth.php
+
     public function before(RequestInterface $request, $arguments = null)
     {
-        // jika user belum login
         if (!session()->get('logged_in')) {
-            // maka redirct ke halaman login
-            return redirect()->to('/login');
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        if ($arguments) {
+            $requiredRole = $arguments[0]; // contoh: '1' untuk admin
+            if (session()->get('role') != $requiredRole) {
+                return redirect()->to('/unauthorized')->with('error', 'Anda tidak memiliki akses.');
+            }
         }
     }
 
-    //--------------------------------------------------------------------
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        // Kosongkan atau tambahkan logika after
     }
+
+        public function unauthorized()
+    {
+        return view('errors/unauthorized');
+    }
+
 }

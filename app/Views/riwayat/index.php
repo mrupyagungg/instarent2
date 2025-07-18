@@ -275,7 +275,7 @@ a {
                                             <div class="row mb-2">
                                                 <div class="col-sm-4 text-muted"><strong>Payment Method</strong>
                                                 </div>
-                                                <div class="col-sm-4 fw-bold">Bank Transfer</div>
+                                                <div class="col-sm-4 fw-bold">Transfer</div>
                                                 <div class="col-sm-4"></div>
                                             </div>
                                             <div class="row mb-2">

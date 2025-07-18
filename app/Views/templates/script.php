@@ -29,63 +29,64 @@
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyCtSAR45TFgZjOs4nBFFZnII-6mMHLfSYI"></script>
 <script src="<?= base_url('assets/js/app.js') ?>"></script>
 <script src="<?= base_url('assets/js/number.js') ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 
 <script>
-    $('.dropify').dropify();
-    $('#table').dataTable({});
-    $("#basic-date").flatpickr({
-        enableTime: false,
-        dateFormat: "Y-m-d"
-    });
-    $("#basic").flatpickr({
-        altInput: true,
-        dateFormat: "Y-m-d",
-        plugins: [
-            new monthSelectPlugin({
-                shorthand: true, //defaults to false
-                altFormat: "F Y", //defaults to "F Y"
-            })
-        ]
-    });
+$('.dropify').dropify();
+$('#table').dataTable({});
+$("#basic-date").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+$("#basic").flatpickr({
+    altInput: true,
+    dateFormat: "Y-m-d",
+    plugins: [
+        new monthSelectPlugin({
+            shorthand: true, //defaults to false
+            altFormat: "F Y", //defaults to "F Y"
+        })
+    ]
+});
 </script>
 
 
 <script type="text/javascript">
-    <?php if (session()->getFlashdata('success')) { ?>
-        Lobibox.notify('info', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-check-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('success'); ?>'
-        });
-    <?php } else if (session()->getFlashdata('error')) {  ?>
-        Lobibox.notify('error', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-x-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('error'); ?>'
-        });
-    <?php } else if (session()->getFlashdata('warning')) {  ?>
-        Lobibox.notify('warning', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-error',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('warning'); ?>'
-        });
-    <?php } else if (session()->getFlashdata('info')) {  ?>
-        Lobibox.notify('info', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-info-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('info'); ?>'
-        });
-    <?php } ?>
+<?php if (session()->getFlashdata('success')) { ?>
+Lobibox.notify('info', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-check-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('success'); ?>'
+});
+<?php } else if (session()->getFlashdata('error')) {  ?>
+Lobibox.notify('error', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-x-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('error'); ?>'
+});
+<?php } else if (session()->getFlashdata('warning')) {  ?>
+Lobibox.notify('warning', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-error',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('warning'); ?>'
+});
+<?php } else if (session()->getFlashdata('info')) {  ?>
+Lobibox.notify('info', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-info-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('info'); ?>'
+});
+<?php } ?>
 </script>

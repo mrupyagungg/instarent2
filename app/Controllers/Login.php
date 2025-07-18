@@ -29,7 +29,7 @@ class Login extends BaseController
                     'user_id'       => $data['user_id'],
                     'username'      => $data['username'],
                     'email'         => $data['email'],
-                    'role'          => $data['role'],  // Store the user role in session
+                    'role'          => $data['role'],
                     'logged_in'     => TRUE
                 ];
                 $session->set($ses_data);
@@ -56,4 +56,10 @@ class Login extends BaseController
         $session->destroy();
         return redirect()->to('/login');
     }
+
+        public function unauthorized()
+    {
+        return view('errors/unauthorized');
+    }
+
 }

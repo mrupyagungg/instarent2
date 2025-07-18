@@ -31,61 +31,78 @@
 <script src="<?= base_url('assets/js/number.js') ?>"></script>
 
 <script>
-    $('.dropify').dropify();
-    $('#table').dataTable({});
-    $("#basic-date").flatpickr({
-        enableTime: false,
-        dateFormat: "Y-m-d"
-    });
-    $("#basic").flatpickr({
-        altInput: true,
-        dateFormat: "Y-m-d",
-        plugins: [
-            new monthSelectPlugin({
-                shorthand: true, //defaults to false
-                altFormat: "F Y", //defaults to "F Y"
-            })
-        ]
-    });
+$('.dropify').dropify();
+$('#table').dataTable({});
+$("#basic-date").flatpickr({
+    enableTime: false,
+    dateFormat: "Y-m-d"
+});
+$("#basic").flatpickr({
+    altInput: true,
+    dateFormat: "Y-m-d",
+    plugins: [
+        new monthSelectPlugin({
+            shorthand: true, //defaults to false
+            altFormat: "F Y", //defaults to "F Y"
+        })
+    ]
+});
 </script>
 
 
 <script type="text/javascript">
-    <?php if (session()->getFlashdata('success')) { ?>
-        Lobibox.notify('info', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-check-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('success'); ?>'
+<?php if (session()->getFlashdata('success')) { ?>
+Lobibox.notify('info', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-check-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('success'); ?>'
+});
+<?php } else if (session()->getFlashdata('error')) {  ?>
+Lobibox.notify('error', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-x-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('error'); ?>'
+});
+<?php } else if (session()->getFlashdata('warning')) {  ?>
+Lobibox.notify('warning', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-error',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('warning'); ?>'
+});
+<?php } else if (session()->getFlashdata('info')) {  ?>
+Lobibox.notify('info', {
+    pauseDelayOnHover: true,
+    icon: 'bx bx-info-circle',
+    continueDelayOnInactiveTab: false,
+    position: 'top center',
+    size: 'mini',
+    msg: '<?= session()->getFlashdata('info'); ?>'
+});
+<?php } ?>
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.querySelector('[data-nav-toggle-btn]');
+    const navbar = document.querySelector('[data-navbar]');
+
+    toggleBtn?.addEventListener("click", () => {
+        navbar.classList.toggle("active");
+    });
+
+    document.querySelectorAll("[data-nav-link]").forEach(link => {
+        link.addEventListener("click", () => {
+            navbar.classList.remove("active");
         });
-    <?php } else if (session()->getFlashdata('error')) {  ?>
-        Lobibox.notify('error', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-x-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('error'); ?>'
-        });
-    <?php } else if (session()->getFlashdata('warning')) {  ?>
-        Lobibox.notify('warning', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-error',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('warning'); ?>'
-        });
-    <?php } else if (session()->getFlashdata('info')) {  ?>
-        Lobibox.notify('info', {
-            pauseDelayOnHover: true,
-            icon: 'bx bx-info-circle',
-            continueDelayOnInactiveTab: false,
-            position: 'top center',
-            size: 'mini',
-            msg: '<?= session()->getFlashdata('info'); ?>'
-        });
-    <?php } ?>
+    });
+});
 </script>

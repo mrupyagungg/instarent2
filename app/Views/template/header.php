@@ -83,7 +83,7 @@
                     <!-- Dropdown content -->
                     <div id="dropdownMenu" class="dropdown-menu"
                         style="display: none; position: absolute; top: 100%; right: 0; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); padding: 10px; border-radius: 5px; z-index: 999;">
-                        <a href="/profile" class="dropdown-item">Profil</a>
+                        <a href="/customer/profile" class="dropdown-item">Profil</a>
                         <a href="/logout" class="dropdown-item">Logout</a>
                     </div>
                 </div>

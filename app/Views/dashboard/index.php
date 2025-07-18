@@ -15,33 +15,59 @@
 
         <div class="row">
             <?php 
-            $cards = [
-                ["title" => "Total Pemesanan", "value" => nominal($total_pemesanan)],
-                ["title" => "Total Pengeluaran", "value" => nominal($total_pengeluaran)],
-                ["title" => "Transaksi Pemesanan", "value" => "$data_pemesanan Transaksi"],
-                ["title" => "Transaksi Pengeluaran", "value" => "$data_pengeluaran Transaksi"]
-            ];
-            ?>
+    $cards = [
+        [
+            "title" => "Total Pemesanan", 
+            "value" => nominal($total_pemesanan), 
+            "color" => "bg-primary", 
+            "icon" => "fas fa-shopping-cart"
+        ],
+        [
+            "title" => "Total Pengeluaran", 
+            "value" => nominal($total_pengeluaran), 
+            "color" => "bg-success", 
+            "icon" => "fas fa-wallet"
+        ],
+        [
+            "title" => "Transaksi Pemesanan", 
+            "value" => "$data_pemesanan Transaksi", 
+            "color" => "bg-warning", 
+            "icon" => "fas fa-file-invoice"
+        ],
+        [
+            "title" => "Transaksi Pengeluaran", 
+            "value" => "$data_pengeluaran Transaksi", 
+            "color" => "bg-danger", 
+            "icon" => "fas fa-receipt"
+        ]
+    ];
+    ?>
 
-            <?php foreach ($cards as $card) : ?>
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h4 class="card-title mb-4"><b><?= $card['title'] ?> (<?= date('F Y') ?>)</b></h4>
-                        <h3 class="text-dark"><?= $card['value'] ?></h3>
+            <?php foreach ($cards as $card): ?>
+            <div class="col-lg-6 col-12">
+                <div class="small-box <?= $card['color'] ?>">
+                    <div class="inner text-center">
+                        <h4><b><?= $card['title'] ?> (<?= date('F Y') ?>)</b></h4>
+                        <h3><?= $card['value'] ?></h3>
+                    </div>
+                    <div class="icon">
+                        <i class="<?= $card['icon'] ?>"></i>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
-        <div class="card mt-4 shadow-sm">
-            <div class="card-body">
-                <h4 class="card-title text-center mb-4">Kendaraan yang Paling Sering Dipinjam</h4>
-                <div id="chart-kendaraan" style="height: 400px;"></div>
-            </div>
-        </div>
+
 
     </div>
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title text-center mb-4">Kendaraan yang Paling Sering Dipinjam</h4>
+            <div id="chart-kendaraan" style="height: 400px;"></div>
+        </div>
+    </div>
+
+</div>
 </div>
 <?= $this->endSection(); ?>
 

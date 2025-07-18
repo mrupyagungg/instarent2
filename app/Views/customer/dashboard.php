@@ -69,13 +69,14 @@
                 </a>
                 <span class="contact-time d-block text-muted small"><?= esc(session()->get('email')) ?></span>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/profile">Profil</a>
+                    <a class="dropdown-item" href="/customer/profile">Profil</a>
                     <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
             </div>
 
         </div>
     </header>
+
 
 
     <main>
@@ -86,6 +87,7 @@
       -->
 
             <section class="section hero" id="home">
+                <div class="hero-banner"></div>
                 <div class="container">
                     <!-- Tampilkan pesan welcome jika username ada di session -->
 
